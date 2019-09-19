@@ -1,0 +1,10 @@
+DATE=$(date +%Y-%m-%d)
+OWNER=${1:-tristankenney}
+
+for d in */ ; do
+    IMAGE=$(basename "$d")
+    docker build -t $OWNER/$IMAGE:latest -t $OWNER/$IMAGE:$DATE ./$IMAGE
+    docker push $OWNER/$IMAGE:latest
+    docker push $OWNER/$IMAGE:$DATE
+done
+
